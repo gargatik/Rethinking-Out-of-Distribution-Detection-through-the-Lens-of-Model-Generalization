@@ -29,7 +29,7 @@ Our framework investigates how **Self-Supervised Learning (SSL)** representation
 ├── Pseudo_label_training/
 │   ├── train_backbone.py
 │   └── utils/
-│       └── data.py
+│       └── dataset.py
 │
 ├── eval.py
 ├── ensemble.py
@@ -104,7 +104,7 @@ This script extracts features from the pretrained SSL backbone and generates pse
 Before training, configure the pseudo-label paths in:
 
 ```text
-Pseudo_label_training/utils/data.py
+Pseudo_label_training/utils/dataset.py
 ```
 
 Replace the placeholder paths with the generated training and testing pseudo-label files.
