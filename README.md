@@ -19,10 +19,10 @@ The environment requirements are identical to the [Mixed Barlow Twins repository
 ### 1. Self-Supervised Pre-Training (SSL)
 We employ the Mixed Barlow Twins method for representation learning. To start pre-training and obtain k-NN evaluation results on **CIFAR-10, CIFAR-100, TinyImageNet, and STL-10** using **ResNet-18** or **ResNet-50** backbones, navigate to the `SSL` folder and execute the script matching your target configuration:
 
-```bash
+```Shell
 # Pre-training with ResNet-18
 sh scripts-pretrain-resnet18/[dataset].sh
-```bash
+```Shell
 # Pre-training with ResNet-50
 sh scripts-pretrain-resnet50/[dataset].sh
 
@@ -30,7 +30,7 @@ sh scripts-pretrain-resnet50/[dataset].sh
 
 #### 2. Pseudo-Label Generation
 To generate pseudo-labels using K-Means clustering, run the `clustering.py` script located inside the `SSL` folder:
-```bash
+```Shell
 python clustering.py
 
 #### 2. Pseudo-Label Training
@@ -40,7 +40,7 @@ Open Pseudo_label_training/utils/data.py.
 
 Replace the placeholder paths for the train and test pseudo-labels with your actual generated file paths.
 
-```bash
+```Shell
 
 python train_backbone.py -d cifar10 -g 0 -n resnet18 -s 'save_name'
 
@@ -51,7 +51,7 @@ To run Out-of-Distribution detection using the norm of the penultimate block (Fe
 Pre-trained Checkpoints
 Pre-trained backbones and evaluation checkpoints will be made available for download here:
 
-```bash
+```Shell
 python eval.py -n resnet18 -d 'data_name' -g 'gpu_num' -s 'save_name' -m featurenorm
 
 Ensemble OOD Detection
