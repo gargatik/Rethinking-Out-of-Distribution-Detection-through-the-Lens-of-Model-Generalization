@@ -78,8 +78,8 @@ Supported datasets include:
 
 * CIFAR-10
 * CIFAR-100
-* TinyImageNet
-* STL-10
+* SVHN
+* etc.
 
 The scripts will train the SSL model and report k-NN evaluation performance.
 
