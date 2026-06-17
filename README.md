@@ -22,6 +22,46 @@ We employ the Mixed Barlow Twins method for representation learning. To start pr
 ```bash
 # Pre-training with ResNet-18
 sh scripts-pretrain-resnet18/[dataset].sh
-
+```bash
 # Pre-training with ResNet-50
 sh scripts-pretrain-resnet50/[dataset].sh
+
+### Pseudo-Labeling, Training, & Evaluation Workflow
+
+#### 2. Pseudo-Label Generation
+To generate pseudo-labels using K-Means clustering, run the `clustering.py` script located inside the `SSL` folder:
+```bash
+python clustering.py
+
+#### 2. Pseudo-Label Training
+To train your backbone using the generated pseudo-labels, configure your data paths and execute the training script:
+
+Open Pseudo_label_training/utils/data.py.
+
+Replace the placeholder paths for the train and test pseudo-labels with your actual generated file paths.
+
+```bash
+
+python train_backbone.py -d cifar10 -g 0 -n resnet18 -s 'save_name'
+
+#### 2. Evaluation & OOD Detection
+
+Single-Model OOD Detection
+To run Out-of-Distribution detection using the norm of the penultimate block (Feature Norm method), pass the -m featurenorm flag to eval.py:
+Pre-trained Checkpoints
+Pre-trained backbones and evaluation checkpoints will be made available for download here:
+
+```bash
+python eval.py -n resnet18 -d 'data_name' -g 'gpu_num' -s 'save_name' -m featurenorm
+
+Ensemble OOD Detection
+To use an ensemble configuration for OOD detection, execute the following script:
+
+python ensemblel.py -n resnet18 -d cifar10 -g 0 -s 'save_name'
+
+Acknowledgments
+This implementation builds upon or references core components from the following open-source repositories:
+
+Self-Supervised Learning Framework: https://github.com/wgcban/mix-bt
+
+OOD Evaluation & Block Architectures: https://github.com/gist-ailab/block-selection-for-OOD-detection
